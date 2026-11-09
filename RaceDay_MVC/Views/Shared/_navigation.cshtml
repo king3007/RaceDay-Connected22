@@ -1,0 +1,9 @@
+<header class="site-header">
+<a asp-controller="Home" asp-action="Index" class="brand"><span class="brand-mark">↗</span>RaceDay<span class="brand-dot">.</span></a>
+<button class="menu-toggle" type="button" aria-controls="public-menu" aria-expanded="false">Menu ☰</button>
+<nav id="public-menu" class="public-menu" aria-label="Main navigation">
+<a asp-controller="Home" asp-action="Index">Home</a><a asp-controller="Home" asp-action="Events">Explore events</a><a asp-controller="Home" asp-action="Calendar">Calendar</a><a asp-controller="Home" asp-action="Results">Results</a><a asp-controller="Home" asp-action="AboutUs">Our story</a><a asp-controller="Home" asp-action="ContactUs">Contact</a>
+<div class="header-actions">@if (User.Identity?.IsAuthenticated == true) {
+<a asp-controller="@(User.IsInRole("Organiser") ? "Organiser" : "Participant")" asp-action="@(User.IsInRole("Organiser") ? "OrganiserDashboard" : "ParticipantDashboard")" class="pill-button">My dashboard ↗</a>
+} else { <a asp-controller="Home" asp-action="Login">Log in</a><a asp-controller="Home" asp-action="Register" class="pill-button">Join the start line ↗</a> }</div>
+</nav></header>

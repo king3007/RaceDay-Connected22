@@ -1,0 +1,2 @@
+@model List<RaceDay_MVC.Models.ResultDto>
+<div class="data-table"><table><thead><tr><th>Event / participant</th><th>Category</th><th>Finish time</th><th>Position</th></tr></thead><tbody>@foreach(var r in Model) { <tr><td>@(string.IsNullOrEmpty(r.ParticipantName) ? r.EventName : r.ParticipantName)</td><td>@r.CategoryName</td><td>@(r.FinishTime?.ToString() ?? "Pending")</td><td>@(r.FinishingPosition?.ToString() ?? "Pending")</td></tr> }</tbody></table>@if(!Model.Any()) { <p class="empty-state">No results have been recorded yet.</p> }</div>

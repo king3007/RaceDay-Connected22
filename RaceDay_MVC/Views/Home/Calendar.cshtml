@@ -1,0 +1,3 @@
+@model List<RaceDay_MVC.Models.EventDto>
+@{ ViewData["Title"] = "Race calendar"; }
+<section class="calendar-hero"><p class="section-label">PLAN YOUR NEXT CHALLENGE</p><h1>Make room for race day.</h1><p>Event dates loaded directly from RaceDay.</p></section><section class="rd-section"><div class="calendar-agenda">@foreach(var ev in Model.OrderBy(e=>e.EventDate)) { <a asp-action="Events" class="agenda-row"><span class="agenda-date">@ev.EventDate.ToString("dd")<small>@ev.EventDate.ToString("MMM yyyy")</small></span><div><h2>@ev.Name</h2><p>@ev.OrganiserName · @ev.EventDate.ToString("HH:mm")</p></div><span>↗</span></a> }@if(!Model.Any()) { <p>No events are scheduled yet.</p> }</div></section>

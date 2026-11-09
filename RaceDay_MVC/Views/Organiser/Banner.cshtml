@@ -1,0 +1,7 @@
+@model RaceDay_MVC.Models.EventBannerViewModel
+@{ ViewData["Title"] = "Update event banner"; }
+<div class="dashboard-header"><div><p class="eyebrow">YOUR EVENT IMAGE</p><h1>@Model.EventName</h1></div><a asp-action="OrganiserDashboard" class="text-link">Back to overview →</a></div>
+<section class="dashboard-container"><div class="editor-card"><h2>Update event banner</h2>
+<form asp-action="Banner" asp-route-id="@Model.EventId" method="post" enctype="multipart/form-data"><div asp-validation-summary="All" class="validation-summary"></div>
+@if(Model.BannerPath != null) { <img class="upload-preview banner-preview" src="@Url.Content("~" + Model.BannerPath)" alt="Current event banner" /> }
+<div class="auth-input-group upload-panel"><label asp-for="BannerImage">Choose a new banner</label><input asp-for="BannerImage" type="file" accept=".jpg,.jpeg,.png,.webp" required data-image-input data-preview-target="banner-preview" /><p class="field-note">JPG, PNG or WebP · Up to 5 MB.</p><img id="banner-preview" class="upload-preview banner-preview" alt="Selected banner preview" hidden /><p class="upload-feedback" aria-live="polite"></p></div><button class="pill-button" type="submit">Save banner ↗</button></form></div></section>

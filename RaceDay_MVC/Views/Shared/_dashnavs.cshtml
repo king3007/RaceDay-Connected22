@@ -1,0 +1,27 @@
+@using System.Security.Claims
+@using RaceDay_MVC.Services
+@inject LocalImageStore ImageStore
+@{ var organiser = User.IsInRole("Organiser");
+   int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out var profileId);
+   var avatar = ImageStore.GetPath(ImageKind.Profiles, profileId) ?? "/images/default-avatar.svg";
+}
+<aside class="workspace-sidebar">
+<a asp-controller="Home" asp-action="Index" class="brand"><span class="brand-mark">↗</span>RaceDay.</a>
+<p class="sidebar-label">YOUR WORKSPACE</p>
+<nav aria-label="Dashboard navigation">
+@if (organiser) {
+<a asp-controller="Organiser" asp-action="OrganiserDashboard">◈ Overview</a>
+<a asp-controller="Organiser" asp-action="CreateEvent">＋ Create event</a>
+} else {
+<a asp-controller="Participant" asp-action="ParticipantDashboard">◈ Overview</a>
+<a asp-controller="Participant" asp-action="BrowseEvents">↗ Browse events</a>
+<a asp-controller="Participant" asp-action="MyEnrolments">▤ My enrolments</a>
+<a asp-controller="Participant" asp-action="MyResults">☆ My results</a>
+
+}
+<a asp-controller="Account" asp-action="Profile">◎ My profile</a>
+<a asp-controller="Home" asp-action="Calendar">▦ Race calendar</a>
+</nav>
+<a asp-controller="Account" asp-action="Profile" class="sidebar-profile"><img src="@Url.Content("~" + avatar)" alt="Your profile photo" /><span>@User.Identity?.Name</span></a>
+<div class="sidebar-bottom"><span class="sidebar-label">@(organiser ? "ORGANISER" : "PARTICIPANT") ACCOUNT</span><form asp-controller="Home" asp-action="Logout" method="post"><button class="sidebar-logout" type="submit">Log out →</button></form></div>
+</aside>

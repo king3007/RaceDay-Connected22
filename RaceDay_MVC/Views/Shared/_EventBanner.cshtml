@@ -1,0 +1,5 @@
+@model RaceDay_MVC.Models.EventDto
+@using RaceDay_MVC.Services
+@inject LocalImageStore ImageStore
+@{ var banner = ImageStore.GetPath(ImageKind.Banners, Model.EventId); }
+@if (banner != null) { <img class="event-banner" src="@Url.Content("~" + banner)" alt="Banner for @Model.Name" loading="lazy" /> }

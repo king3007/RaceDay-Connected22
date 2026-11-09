@@ -1,0 +1,47 @@
+name: RaceDay MVC CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out MVC app
+        uses: actions/checkout@v4
+
+      - name: Check out API project
+        uses: actions/checkout@v4
+        with:
+          repository: nalediey/RaceDay_api
+          ref: master
+          path: ../RaceDay_api
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Restore
+        run: dotnet restore RaceDay_MVC.sln
+
+      - name: Build
+        run: dotnet build RaceDay_MVC.sln --configuration Release --no-restore
+
+      - name: Publish
+        run: dotnet publish RaceDay_MVC.csproj --configuration Release --output ./publish
+
+      - name: Upload publish artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: raceday-mvc
+          path: ./publish
+          retention-days: 7

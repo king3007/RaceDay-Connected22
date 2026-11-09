@@ -1,0 +1,9 @@
+@model List<RaceDay_MVC.Models.EventDto>
+@if (!Model.Any()) { <div class="empty-state"><h2>No events yet.</h2><p>New events will appear here when organisers create them.</p></div> }
+<div class="live-event-grid">@foreach (var ev in Model.OrderBy(e => e.EventDate)) {
+<article class="live-event-card"><partial name="_EventBanner" model="ev" /><div class="event-card-top"><span>RACEDAY EVENT</span><span>@ev.EventDate.ToString("dd MMM yyyy")</span></div><h2>@ev.Name</h2><p>@ev.Description</p><p class="field-note">Organised by @ev.OrganiserName · @ev.EventDate.ToString("HH:mm")</p><div class="category-chips">@foreach(var category in ev.Categories) { <span>@category.Name · @category.CategoryType</span> }</div>
+@if (User.IsInRole("Participant")) {
+@if(ev.Categories.Any()) { <form asp-controller="Participant" asp-action="Enrol" method="post" class="enrol-form"><input type="hidden" name="eventId" value="@ev.EventId" /><label for="category-@ev.EventId">Choose your race category</label><select id="category-@ev.EventId" name="categoryId" required>@foreach(var c in ev.Categories) { <option value="@c.CategoryId">@c.Name (@c.CategoryType)</option> }</select><button type="submit" class="pill-button">Enrol in event ↗</button></form> }
+else { <p class="field-note">Categories have not been added yet.</p> }
+} else if(User.Identity?.IsAuthenticated != true) { <a asp-controller="Home" asp-action="Login" class="pill-button">Log in to enrol ↗</a> }
+</article> }</div>

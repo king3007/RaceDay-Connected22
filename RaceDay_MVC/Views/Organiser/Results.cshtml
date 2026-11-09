@@ -1,0 +1,3 @@
+@model List<RaceDay_MVC.Models.ResultDto>
+@{ ViewData["Title"] = "Event results"; }
+<div class="dashboard-header"><div><p class="eyebrow">EVENT RESULTS</p><h1>The finish line.</h1></div><a asp-action="Enrolments" asp-route-id="@ViewBag.EventId" class="pill-button">Capture results ↗</a></div><section class="dashboard-container"><partial name="_ResultsTable" model="Model" /></section>

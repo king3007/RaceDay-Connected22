@@ -1,0 +1,9 @@
+@model RaceDay_MVC.Models.ProfileViewModel
+@{ ViewData["Title"] = "My profile"; }
+<div class="dashboard-header"><div><p class="eyebrow">YOUR ACCOUNT</p><h1>Make it yours.</h1><p>Update your details and profile photo.</p></div></div>
+<section class="dashboard-container"><div class="editor-card"><div class="profile-intro"><img class="profile-avatar" src="@Url.Content("~" + (Model.PhotoPath ?? "/images/default-avatar.svg"))" alt="Your current profile photo" /><div><h2>@Model.FirstName @Model.LastName</h2><p>@Model.Email · @Model.Role</p></div></div>
+<form asp-controller="Account" asp-action="Profile" method="post" enctype="multipart/form-data"><div asp-validation-summary="All" class="validation-summary"></div>
+<div class="auth-input-group upload-panel"><label asp-for="ProfileImage">Profile photo</label><input asp-for="ProfileImage" type="file" accept=".jpg,.jpeg,.png,.webp" data-image-input data-preview-target="profile-preview" /><span asp-validation-for="ProfileImage" class="validation-summary"></span><p class="field-note">JPG, PNG or WebP · Up to 5 MB. Leave empty to keep your current photo.</p><img id="profile-preview" class="upload-preview profile-avatar" alt="Selected profile photo preview" hidden /><p class="upload-feedback" aria-live="polite"></p></div>
+<div class="auth-input-group"><label asp-for="FirstName">First name</label><input asp-for="FirstName" required maxlength="100" /></div><div class="auth-input-group"><label asp-for="LastName">Last name</label><input asp-for="LastName" required maxlength="100" /></div>
+@if(User.IsInRole("Organiser")) { <div class="auth-input-group"><label asp-for="PhoneNumber">Phone number</label><input asp-for="PhoneNumber" type="tel" maxlength="20" /></div> }
+<button class="pill-button" type="submit">Save profile ↗</button></form></div></section>

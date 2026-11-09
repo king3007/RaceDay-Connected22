@@ -1,0 +1,45 @@
+@{
+    ViewData["Title"] = "Login";
+}
+@model RaceDay_MVC.Models.LoginDto
+
+
+
+
+<div class="auth-page">
+    <div class="auth-container">
+        <div class="auth-image login-image">
+            <div class="auth-image-content">
+                <h1>WELCOME BACK!</h1>
+                <p>Your next finish line starts here.</p>
+            </div>
+        </div>
+
+        <div class="auth-form">
+            <span class="auth-label">RACEDAY ACCOUNT</span>
+            <h2>Login to Your Account</h2>
+
+            <form asp-controller="Home" asp-action="Login" method="post">
+                @Html.AntiForgeryToken()
+                <div asp-validation-summary="All" class="validation-summary"></div>
+
+                <div class="auth-input-group">
+                    <label>Email Address</label>
+                    <input type="email" asp-for="Email" placeholder="Enter your email address" required />
+                </div>
+
+                <div class="auth-input-group">
+                    <label>Password</label>
+                    <input type="password" asp-for="Password" placeholder="Enter your password" required />
+                </div>
+
+                <button type="submit" class="auth-submit">Login to RaceDay</button>
+            </form>
+
+            <p class="auth-switch">
+                Don't have an account?
+                <a asp-controller="Home" asp-action="Register">Register here</a>
+            </p>
+        </div>
+    </div>
+</div>

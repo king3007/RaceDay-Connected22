@@ -1,0 +1,17 @@
+[
+  {
+    "Name": "RaceDay MVC + API",
+    "Projects": [
+      {
+        "Path": "RACEDAY_API_POE\\RACEDAY_API_POE.csproj",
+        "Action": "Start",
+        "DebugTarget": "https"
+      },
+      {
+        "Path": "RaceDay_MVC\\RaceDay_MVC.csproj",
+        "Action": "Start",
+        "DebugTarget": "https"
+      }
+    ]
+  }
+]

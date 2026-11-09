@@ -1,0 +1,13 @@
+@model RaceDay_MVC.Models.RegisterDto
+@{ ViewData["Title"] = "Register"; }
+<div class="auth-page"><div class="auth-container register-container"><div class="auth-image register-image"><div class="auth-image-content"><h1>JOIN THE<br />START LINE.</h1><p>Your RaceDay story starts here.</p></div></div><div class="auth-form"><span class="auth-label">CREATE YOUR ACCOUNT</span><h2>Register with RaceDay</h2><form asp-action="Register" method="post"><div asp-validation-summary="All" class="validation-summary"></div><div class="register-inputs">
+<div class="auth-input-group"><label asp-for="FirstName">First name</label><input asp-for="FirstName" autocomplete="given-name" required /></div>
+<div class="auth-input-group"><label asp-for="LastName">Last name</label><input asp-for="LastName" autocomplete="family-name" required /></div>
+<div class="auth-input-group"><label asp-for="Email"></label><input asp-for="Email" autocomplete="email" required /></div>
+<div class="auth-input-group"><label asp-for="PhoneNumber">Phone number</label><input asp-for="PhoneNumber" type="tel" /></div>
+<div class="auth-input-group"><label asp-for="Password"></label><input asp-for="Password" autocomplete="new-password" minlength="8" required /></div>
+<div class="auth-input-group"><label asp-for="ConfirmPassword">Confirm password</label><input asp-for="ConfirmPassword" autocomplete="new-password" required /></div>
+<div class="auth-input-group"><label asp-for="DateOfBirth">Date of birth</label><input asp-for="DateOfBirth" type="date" required /></div>
+<div class="auth-input-group"><label asp-for="Gender"></label><select asp-for="Gender"><option>Female</option><option>Male</option><option>Other</option></select></div>
+<div class="auth-input-group"><label asp-for="Role">Account type</label><select asp-for="Role"><option value="Participant">Participant</option><option value="Organiser">Event organiser</option></select></div>
+</div><button type="submit" class="auth-submit">Create my account ↗</button></form><p class="auth-switch">Already registered? <a asp-action="Login">Log in</a></p></div></div></div>
